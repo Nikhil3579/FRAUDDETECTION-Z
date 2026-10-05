@@ -1,6 +1,28 @@
 # FRAUDDETECTION-Z
 # AI-Powered Fraud Detection System
-
+LIVE2F_ZIDIO/
+│
+├── DATA/
+│   └── synthetic_fraud_dataset1.csv
+│
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data_preprocessing.py
+│   ├── feature_engineering.py
+│   ├── imbalance_cost.py
+│   ├── evaluate.py
+│   ├── train_baselines.py
+│   ├── hyperparameter_tuning.py
+│   ├── train_final.py
+│   └── visualization.py
+│
+├── models/
+├── reports/
+├── outputs/
+├── api/
+├── requirements.txt
+└── README.md
 ## 1. Abstract
 
 This project presents an end-to-end machine learning system for detecting potentially fraudulent financial transactions. The system performs data preprocessing, exploratory data analysis, feature engineering, class imbalance handling, baseline modeling, hyperparameter optimization, cross-validation, cost-sensitive threshold selection, and deployment through a Flask API.

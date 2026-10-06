@@ -3,7 +3,7 @@ import smtplib
 from email.message import EmailMessage
 
 
-SMTP_HOST = os.getenv("SMTP_HOST", "NB.gmail.com")
+SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
 
 SMTP_USERNAME = os.getenv("SMTP_USERNAME")

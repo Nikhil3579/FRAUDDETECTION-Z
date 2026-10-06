@@ -51,7 +51,7 @@ PROJECT_ROOT = os.path.dirname(
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
-
+DASHBOARD_DIR = os.path.join(PROJECT_ROOT, "dashboard")
 
 # ------------------------------------------------------------
 # THIRD-PARTY IMPORTS
@@ -62,12 +62,8 @@ import pandas as pd
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-
-
-# ------------------------------------------------------------
-# PROJECT IMPORTS
-# ------------------------------------------------------------
-
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from src import config
 from src.feature_engineering import prepare_features
 from api.schemas import (
@@ -281,16 +277,9 @@ def _risk_level(proba: float) -> str:
 
 @app.get("/")
 def root():
-
-    return {
-        "status": "ok",
-        "message": "Fraud Detection API is running.",
-        "docs": "/docs",
-        "health": "/health",
-        "prediction_endpoint": "/predict",
-        "email_alert": "enabled",
-    }
-
+    return FileResponse(
+        os.path.join(DASHBOARD_DIR, "index.html")
+    )
 
 # ============================================================
 # HEALTH CHECK
@@ -312,8 +301,6 @@ def health():
             and os.getenv("ALERT_TO_EMAIL")
         ),
     }
-
-
 # ============================================================
 # PREDICTION ENDPOINT
 # ============================================================
@@ -498,6 +485,13 @@ def predict(request: TransactionRequest):
             status_code=400,
             detail=f"Prediction failed: {str(e)}",
         )
+
+
+app.mount(
+    "/",
+    StaticFiles(directory=DASHBOARD_DIR, html=True),
+    name="dashboard",
+)
 
 
 # ============================================================

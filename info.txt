@@ -1,0 +1,182 @@
+
+evaluate.py
+
+Main metrics
+------------
+1. PR-AUC
+   Precision-Recall Area Under Curve.
+
+2. Recall @ FPR
+   Measures how much fraud we can detect while keeping the false
+   positive rate below a business-defined limit.
+
+3. Confusion Matrix
+   Shows:
+       TN = True Negative
+       FP = False Positive
+       FN = False Negative
+       TP = True Positive
+
+4. Precision
+   Of all transactions predicted as fraud, how many were actually fraud?
+
+5. Recall
+   Of all actual fraud transactions, how many did the model detect?
+
+6. F1-score
+   Harmonic mean of precision and recall.
+
+Why PR-AUC?
+------------
+Fraud detection is a classification problem where the positive class
+(fraud) is usually much smaller than the negative class.
+
+Accuracy alone can be misleading.
+
+For example:
+    If 95% of transactions are legitimate, a model that predicts
+    every transaction as legitimate can achieve 95% accuracy while
+    detecting ZERO fraud.
+
+PR-AUC focuses on the precision and recall of the positive class,
+making it more informative for fraud detection.
+
+Why not use only ROC-AUC?
+-------------------------
+ROC-AUC is useful, but with strong class imbalance it can sometimes
+look better than the actual fraud-detection performance because the
+False Positive Rate is influenced by the large number of legitimate
+transactions.
+
+Therefore, this project uses PR-AUC as the PRIMARY ranking metric.
+
+Why Recall @ FPR?
+-----------------
+A fraud detection system must balance fraud detection against
+false alarms.
+
+Example:
+
+    "If the company can tolerate at most 5% false positives,
+     how much fraud can the model detect?"
+
+This is represented by:
+
+    Recall @ FPR <= 0.05
+
+The target FPR is configured in config.py.
+
+Important
+---------
+Metrics such as PR-AUC and Recall@FPR use predicted probabilities.
+
+The classification metrics (precision, recall and F1) use a
+decision threshold.
+
+Default threshold:
+    0.50
+
+The final project can later optimize this threshold using the
+validation set based on business costs.
+
+Run
+---
+This module is normally imported by other training scripts:
+
+    from .evaluate import full_report, print_report
+"""
+###############################################################
+#######################################################################################
+"""
+hyperparameter_tuning.py
+========================
+
+STEP 6: XGBOOST HYPERPARAMETER TUNING WITH OPTUNA
+
+Purpose
+-------
+Step 5 established baseline performance using:
+
+    1. Logistic Regression
+    2. Random Forest
+    3. XGBoost with default parameters
+
+Now we improve the strongest tabular model, XGBoost, by searching
+for better hyperparameter combinations.
+
+Why Hyperparameter Tuning?
+---------------------------
+XGBoost performance depends heavily on parameters such as:
+
+    - learning_rate
+    - max_depth
+    - n_estimators
+    - subsample
+    - colsample_bytree
+    - min_child_weight
+    - gamma
+    - reg_alpha
+    - reg_lambda
+
+Manually testing combinations is slow and difficult to reproduce.
+
+Optuna automatically searches the parameter space.
+
+Optimization objective
+----------------------
+The project uses:
+
+    PR-AUC / Average Precision
+
+as the primary optimization metric because this is a fraud detection
+problem and the positive class is the important class.
+
+IMPORTANT:
+----------
+    Training data -> used to train each trial
+    Validation data -> used to calculate PR-AUC
+    Test data -> NEVER used during tuning
+
+The test set remains untouched until train_final.py.
+
+Run:
+----
+    python -m src.hyperparameter_tuning
+"""
+########################################################
+#####################################################################
+"""
+train_final.py
+==============
+
+STEP 7: FINAL MODEL TRAINING
+
+This is the final model-building stage before deployment.
+
+Workflow
+--------
+1. Load clean train / validation / test data.
+2. Apply feature engineering.
+3. Load Optuna's best XGBoost parameters.
+4. Calculate scale_pos_weight from TRAINING data only.
+5. Perform Stratified K-Fold Cross-Validation on TRAINING data.
+6. Fit the final XGBoost pipeline on the complete training set.
+7. Generate validation probabilities.
+8. Select the business/cost-optimal threshold using VALIDATION data.
+9. Evaluate exactly once on the untouched TEST data.
+10. Save the complete pipeline.
+11. Save the decision threshold.
+
+Important
+---------
+The test set is NOT used for:
+    - hyperparameter tuning
+    - threshold optimization
+    - model selection
+
+The test set is used only for the final unbiased evaluation.
+
+Run
+---
+    python -m src.train_final
+"""

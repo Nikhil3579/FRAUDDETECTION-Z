@@ -1,0 +1,23 @@
+{
+    "class_distribution": {
+        "total": 50000,
+        "non_fraud": 33933,
+        "fraud": 16067,
+        "non_fraud_percentage": 67.866,
+        "fraud_percentage": 32.134,
+        "status": "MODERATELY IMBALANCED"
+    },
+    "class_weights": {
+        "0": 0.7367459405298676,
+        "1": 1.555984315678098
+    },
+    "scale_pos_weight": 2.111968631356196,
+    "cost_false_negative": 10,
+    "cost_false_positive": 1,
+    "notes": [
+        "SMOTE must only be applied to training data.",
+        "Validation and test data must remain unchanged.",
+        "Threshold should be optimized on validation data.",
+        "Test data should be used only for final evaluation."
+    ]
+}

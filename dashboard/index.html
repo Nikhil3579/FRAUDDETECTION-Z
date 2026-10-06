@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AI Fraud Detection Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <main class="container">
+
+        <header class="header">
+
+            <div>
+                <p class="tag">AI / MACHINE LEARNING</p>
+
+                <h1>
+                    Fraud Detection
+                    <span>System</span>
+                </h1>
+
+                <p class="subtitle">
+                    Real-time transaction risk analysis using
+                    XGBoost and FastAPI
+                </p>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                API ONLINE
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-grid">
+
+            <!-- INPUT CARD -->
+
+            <div class="card">
+
+                <h2>Transaction Details</h2>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label>Transaction Amount</label>
+
+                        <input
+                            id="Transaction_Amount"
+                            type="number"
+                            value="250.5"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Account Balance</label>
+
+                        <input
+                            id="Account_Balance"
+                            type="number"
+                            value="5000"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Daily Transaction Count</label>
+
+                        <input
+                            id="Daily_Transaction_Count"
+                            type="number"
+                            value="5"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Card Age</label>
+
+                        <input
+                            id="Card_Age"
+                            type="number"
+                            value="365"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Previous Fraudulent Activity</label>
+
+                        <select id="Previous_Fraudulent_Activity">
+
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Transaction Type</label>
+
+                        <select id="Transaction_Type">
+
+                            <option value="Online">Online</option>
+                            <option value="ATM">ATM</option>
+                            <option value="POS">POS</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Device Type</label>
+
+                        <select id="Device_Type">
+
+                            <option value="Mobile">Mobile</option>
+                            <option value="Desktop">Desktop</option>
+                            <option value="Tablet">Tablet</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Location</label>
+
+                        <input
+                            id="Location"
+                            type="text"
+                            value="New York"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Merchant Category</label>
+
+                        <select id="Merchant_Category">
+
+                            <option value="Electronics">
+                                Electronics
+                            </option>
+
+                            <option value="Grocery">
+                                Grocery
+                            </option>
+
+                            <option value="Travel">
+                                Travel
+                            </option>
+
+                            <option value="Restaurant">
+                                Restaurant
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Card Type</label>
+
+                        <select id="Card_Type">
+
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">
+                                Mastercard
+                            </option>
+                            <option value="Amex">Amex</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group full">
+
+                        <label>Date</label>
+
+                        <input
+                            id="Date"
+                            type="date"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="predictButton"
+                    onclick="predictFraud()"
+                >
+                    CHECK TRANSACTION
+                </button>
+
+            </div>
+
+
+            <!-- RESULT CARD -->
+
+            <div class="card result-card">
+
+                <h2>Prediction Result</h2>
+
+                <div
+                    id="result"
+                    class="result-placeholder"
+                >
+
+                    <div class="scanner"></div>
+
+                    <p>
+                        Enter transaction details and
+                        click Check Transaction.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <p>
+                Fraud Detection • XGBoost • FastAPI • Machine Learning
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

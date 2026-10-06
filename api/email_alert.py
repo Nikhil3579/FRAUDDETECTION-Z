@@ -221,4 +221,8 @@ This is an automated message from the Fraud Detection System.
             f"{type(error).__name__}: {error}"
         )
 
+<<<<<<< HEAD
         return False
+=======
+        return False
+>>>>>>> e5e94df0b7ede91b945c02911ce19b86e6ca74b1

@@ -4,7 +4,11 @@
 
 // IMPORTANT:
 // Local API
+<<<<<<< HEAD
 //const API_URL = "http://127.0.0.1:8000";
+=======
+const API_URL = "https://frauddetection-z.onrender.com";
+>>>>>>> e5e94df0b7ede91b945c02911ce19b86e6ca74b1
 
 // After Render deployment, change it to:
 //

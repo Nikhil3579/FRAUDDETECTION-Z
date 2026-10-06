@@ -4,12 +4,11 @@
 
 // IMPORTANT:
 // Local API
-const API_URL = "http://127.0.0.1:8000";
+//const API_URL = "http://127.0.0.1:8000";
 
 // After Render deployment, change it to:
 //
-// const API_URL = "https://YOUR-API.onrender.com";
-
+const API_URL = "https://frauddetection-z.onrender.com";
 
 // ============================================================
 // SET TODAY'S DATE

@@ -180,3 +180,83 @@ Run
 ---
     python -m src.train_final
 """
+
+ay:
+
+"I used Pandas and NumPy for data processing, 
+EDA with Matplotlib and Seaborn, OneHotEncoder for categorical variables,
+feature engineering for transaction-to-balance ratio and date-related features,
+and XGBoost for classification. I handled class imbalance using appropriate training strategies,
+compared baseline models, used Optuna for hyperparameter tuning, 
+and evaluated the model using precision, recall, F1, PR-AUC and ROC-AUC. 
+I optimized the decision threshold on validation data because fraud detection has different costs for false positives and false negatives.
+Finally, I deployed the model using FastAPI, connected it to a web dashboard, 
+and added SMTP email alerts."
+
+23. The 5 points I would emphasize in your review
+
+If you have only a few minutes, focus on these:
+
+🔥 Hook 1 — Fraud is not just accuracy
+
+"I focused on recall, precision and PR-AUC because accuracy can be misleading in fraud detection."
+
+🔥 Hook 2 — FN vs FP
+
+"A false negative means actual fraud was missed, while a false positive means 
+a legitimate transaction was incorrectly flagged."
+
+🔥 Hook 3 — Threshold
+
+"I optimized the threshold to approximately 20% rather than blindly using 50%,
+ because missing fraud can have a higher business cost."
+
+🔥 Hook 4 — XGBoost
+
+"I used XGBoost because it is effective for structured/tabular data and 
+can capture nonlinear relationships and feature interactions."
+
+🔥 Hook 5 — End-to-end deployment
+
+"I didn't stop at model training; I deployed the pipeline through FastAPI, created a dashboard,
+ and implemented automated SMTP alerts."
+
+
+
+ 27. The strongest answer if interviewer asks "What is the purpose of your project?"
+
+Say this:
+
+"The purpose is not simply to predict a percentage. The model converts 
+transaction information into a fraud-risk score, and the decision layer 
+converts that score into an operational action. I used validation-based threshold 
+optimization because the cost of missing fraud is different from the cost of generating a false alert. 
+In my current model, a probability of approximately 20% or higher is treated as a fraud alert. 
+This result is then exposed through FastAPI and the dashboard,
+ and a fraudulent prediction can trigger an SMTP notification."
+
+ recision and recall can conflict.
+
+For example:
+
+Precision = 95%
+Recall = 60%
+
+Excellent precision, but the model is missing many fraud cases.
+
+Another model might have:
+
+Precision = 75%
+Recall = 90%
+
+F1 gives a balance between them.
+
+Formula:
+
+F1 = 2 × Precision × Recall
+     ─────────────────────────
+       Precision + Recall
+Interview answer
+
+"I use F1-score as a balance between precision and recall, especially when 
+I want to evaluate the trade-off between false alarms and missed fraud."

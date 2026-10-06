@@ -1,12 +1,6 @@
 
 """
 api/main.py
-===========
-
-FastAPI serving layer for the Fraud Detection project.
-
-Responsibilities
-----------------
 1. Load the trained fraud detection pipeline once at startup.
 2. Load the optimized decision threshold.
 3. Accept a transaction through POST /predict.
@@ -34,7 +28,7 @@ import sys
 
 import joblib
 import pandas as pd
-
+from api.email_alert import send_fraud_alert
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 # ------------------------------------------------------------------

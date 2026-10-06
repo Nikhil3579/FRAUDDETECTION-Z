@@ -16,8 +16,10 @@ from sklearn.metrics import (
     recall_score,
     f1_score,
 )
-
-
+import sys
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(path)
+from src import config
 # ============================================================
 # CONFIGURATION
 # ============================================================
